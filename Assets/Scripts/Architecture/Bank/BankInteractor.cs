@@ -4,9 +4,15 @@ public class BankInteractor : Interactor
 
     public int Coins => _repository.Coins;
 
-    public BankInteractor(BankRepository repository)
+    public override void OnCreate()
     {
-        _repository = repository;
+        base.OnCreate();
+        _repository = ArchitectureTest.Scene.GetRepository<BankRepository>();
+    }
+
+    public override void Initialize()
+    {
+        Bank.Initialize(this);
     }
 
     public bool IsEnougthCoin(int value)
@@ -20,7 +26,7 @@ public class BankInteractor : Interactor
         _repository.Save();
     }
 
-    public void SpentCoins(object sender, int value)
+    public void SpendCoins(object sender, int value)
     {
         _repository.Coins -= value;
         _repository.Save();
