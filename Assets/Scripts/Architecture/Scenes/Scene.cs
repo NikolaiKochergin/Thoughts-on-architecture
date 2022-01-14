@@ -1,4 +1,5 @@
 using System.Collections;
+using UnityEngine;
 
 public class Scene
 {
@@ -13,7 +14,12 @@ public class Scene
         _repositoriesBase = new RepositoriesBase(config);
     }
 
-    public IEnumerator InitializeRoutine()
+    public Coroutine InitializeAsync()
+    {
+        return Coroutines.StartRoutine(InitializeRoutine());
+    }
+
+    private IEnumerator InitializeRoutine()
     {
         _interactorsBase.CreateAllInteractors();
         _repositoriesBase.CreateAllRepositories();

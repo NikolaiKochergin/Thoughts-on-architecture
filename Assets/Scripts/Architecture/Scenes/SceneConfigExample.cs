@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 public class SceneConfigExample : SceneConfig
 {
+    public const string SCENE_NAME = "MainScene";
+
+    public override string SceneName => SCENE_NAME;
+
     public override Dictionary<Type, Interactor> CreateAllInteractors()
     {
         var interactorsMap = new Dictionary<Type, Interactor>();

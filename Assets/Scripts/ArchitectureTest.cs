@@ -2,14 +2,13 @@ using UnityEngine;
 
 public class ArchitectureTest : MonoBehaviour
 {
-    public static Scene Scene;
+    public static SceneManagerBase SceneManager;
 
     private void Start()
     {
-        var sceneConfig = new SceneConfigExample();
-        Scene = new Scene(sceneConfig);
-
-        StartCoroutine(Scene.InitializeRoutine());
+        SceneManager = new SceneManagerExample();
+        SceneManager.InitScenesMap();
+        SceneManager.LoadCurrentSceneAsync();
     }
 
     private void Update()
@@ -17,7 +16,7 @@ public class ArchitectureTest : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             Bank.AddCoins(this, 5);
-            Debug.Log($"Coins added (5), {Bank.Coins}");
+            Debug.Log($"Coins added (5), {Bank.Coins}");    
         }
 
         if (Input.GetKeyDown(KeyCode.S))
