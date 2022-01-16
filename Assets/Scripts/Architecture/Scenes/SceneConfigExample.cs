@@ -12,6 +12,7 @@ public class SceneConfigExample : SceneConfig
         var interactorsMap = new Dictionary<Type, Interactor>();
 
         CreateInteractor<BankInteractor>(interactorsMap);
+        CreateInteractor<PlayerInteractor>(interactorsMap);
 
         return interactorsMap;
     }

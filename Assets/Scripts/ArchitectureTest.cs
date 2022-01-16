@@ -2,17 +2,31 @@ using UnityEngine;
 
 public class ArchitectureTest : MonoBehaviour
 {
-    public static SceneManagerBase SceneManager;
+    private Player _player;
 
     private void Start()
     {
-        SceneManager = new SceneManagerExample();
-        SceneManager.InitScenesMap();
-        SceneManager.LoadCurrentSceneAsync();
+        Game.Run();
+        Game.OnGameInitializedEvent += OnGameInitialized;
+    }
+
+    private void OnGameInitialized()
+    {
+        Game.OnGameInitializedEvent -= OnGameInitialized;
+        var playerInteractor = Game.GetInteractor<PlayerInteractor>();
+        _player = playerInteractor.Player;
     }
 
     private void Update()
     {
+        if(!Bank.IsInitialized)
+            return;
+
+        if (_player == null)
+            return;
+
+        Debug.Log($"Player position: {_player.transform.position}");
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             Bank.AddCoins(this, 5);
